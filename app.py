@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect
 import os
 from dotenv import load_dotenv
 import pyrebase
-
+from auth import insert
 app = Flask(__name__)
 
 load_dotenv()
