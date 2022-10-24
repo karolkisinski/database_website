@@ -1,9 +1,10 @@
-from flask import Flask, render_template, session, request, redirect
+from flask import Flask, render_template, session, request, redirect, flash
 import os
 from dotenv import load_dotenv
 import pyrebase
 from auth import insert
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='templates/static')
 
 load_dotenv()
 
@@ -34,8 +35,9 @@ def home():
             session['user'] = email
             return "You were logged in successfully"
         except:
-            return 'Failed to login'
-    return render_template('home.html')
+            flash(f"Login failed!", "error")
+            return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/login')
 def login():
