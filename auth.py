@@ -29,3 +29,16 @@ def insert(val1, val2, val3, val4, val5, val6):
         "title" : val6
         }
     db.child("questions").push(data)
+
+def categ(val1, val2):
+    data = {
+        "id" : val1, 
+        "name" : val2 
+    }
+    db.child("categories").push(data)
+
+  
+all_users = db.child("categories").get()
+for user in all_users.each():
+    print(user.key()) # Morty
+    print(user.val()['name']) # {name": "Mortimer 'Morty' Smith"}
