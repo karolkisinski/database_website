@@ -26,16 +26,17 @@ auth = firebase.auth()
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if('user' in session):
-        return 'Hi, {}'.format(session['user'])
+        return render_template('home.html')
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         try:
             auth.sign_in_with_email_and_password(email, password)
             session['user'] = email
-            return "You were logged in successfully"
+            flash(f"Zalogowano pomyślnie!", "success")
+            return render_template('home.html')
         except:
-            flash(f"Login failed!", "error")
+            flash(f"Logowanie nieudane!", "error")
             return render_template('login.html')
     return render_template('login.html')
 
@@ -52,5 +53,14 @@ def logout():
     session.pop('user')
     return redirect('/')
 
+@app.route('/categories')
+def categories():
+    if('user' in session):
+        return render_template('categories.html')
+    else:
+         flash(f"Logowanie wymagane!", "error")
+         return render_template('login.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
+
