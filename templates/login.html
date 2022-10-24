@@ -12,7 +12,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Login Page</title>
+    <title>Strona logowania</title>
 </head>
 <body>
     <section class="vh-100 gradient-custom">
@@ -25,19 +25,19 @@
                   <div class="mb-md-5 mt-md-4 pb-5">
       
                     <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                    <p class="text-white-50 mb-5">Wprowadź swój adres email</p>
                     <form action="/" method='POST'>
                     <div class="form-outline form-white mb-4">
-                      <input type="email" id="typeEmailX" class="form-control form-control-lg" required/>
-                      <label class="form-label" for="typeEmailX">Email</label>
+                      <input type="email" name="email" id="email" class="form-control form-control-lg" required/>
+                      <label class="form-label" for="email">Email</label>
                     </div>
       
                     <div class="form-outline form-white mb-4">
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg" required/>
-                      <label class="form-label" for="typePasswordX">Password</label>
+                      <input type="password" name="password" id="password" class="form-control form-control-lg" required/>
+                      <label class="form-label" for="password">Hasło</label>
                     </div>
       
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Zaloguj</button>
                     </form>
                      <!-- Begin alerts -->                
                         {% with messages = get_flashed_messages(with_categories=true) %}
