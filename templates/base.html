@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/confirmation.js') }}" async></script>
-    <title>Strona logowania</title>
+    <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
     <section class="vh-100 gradient-custom">

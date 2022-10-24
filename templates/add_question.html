@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Dodaj pytanie{% endblock %}
 {% block content %}
 <script src="{{ url_for('static', filename='js/confirmation.js') }}" async></script>
   <form action="/add_question" method='POST' id="question_form">
