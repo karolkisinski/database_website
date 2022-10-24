@@ -37,8 +37,15 @@ def categ(val1, val2):
     }
     db.child("categories").push(data)
 
-  
-all_users = db.child("categories").get()
-for user in all_users.each():
-    print(user.key()) # Morty
-    print(user.val()['name']) # {name": "Mortimer 'Morty' Smith"}
+def ca():
+  all_categories = db.child("categories").get()
+  cat_dict = {}
+  for cat in all_categories.each():
+    cat_dict.update({cat.val()['id'] : cat.val()['name']})
+
+  return cat_dict
+
+# all_users = db.child("categories").get()
+# for user in all_users.each():
+#     print(user.key()) # Morty
+#     print(user.val()['name']) # {name": "Mortimer 'Morty' Smith"}

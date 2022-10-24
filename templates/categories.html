@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nazwa kategorii</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for key, value in categories.items() %}
+        <tr>
+          <th scope="row">{{ key }}</th>
+          <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

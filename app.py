@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect, flash
 import os
 from dotenv import load_dotenv
 import pyrebase
-from auth import insert
+from auth import insert, ca
 app = Flask(__name__,
             static_folder='templates/static')
 
@@ -56,7 +56,8 @@ def logout():
 @app.route('/categories')
 def categories():
     if('user' in session):
-        return render_template('categories.html')
+        print("hehehe ", ca())
+        return render_template('categories.html', categories=ca())
     else:
          flash(f"Logowanie wymagane!", "error")
          return render_template('login.html')
