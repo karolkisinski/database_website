@@ -56,10 +56,32 @@ def logout():
 @app.route('/categories')
 def categories():
     if('user' in session):
-        print("hehehe ", ca())
         return render_template('categories.html', categories=ca())
     else:
          flash(f"Logowanie wymagane!", "error")
+         return render_template('login.html')
+
+@app.route('/add_question', methods=['POST', 'GET'])
+def add_question():
+    if('user' in session):
+        if request.method == 'POST':
+            title = request.form.get('title')
+            validanswer = request.form.get('validanswer')
+            badanswer1 = request.form.get('badanswer1')
+            badanswer2 = request.form.get('badanswer2')
+            badanswer3 = request.form.get('badanswer3')
+            category = request.form.get('category')
+            try:
+                string = "{}, " ", {}, " ", {}, " ", {}, " ", {}, " ", {}".format(title, validanswer, badanswer1, badanswer2, badanswer3, category)
+                return string
+            except:
+                flash(f"Cos poszlo nie tak!1", "error")
+                return render_template('add_question.html', categories=ca())
+        else:
+            flash(f"Cos poszlo nie tak!2", "error")
+            return render_template('add_question.html', categories=ca())
+    else:
+         flash(f"Logowanie wymagane!3", "error")
          return render_template('login.html')
 
 if __name__ == '__main__':
