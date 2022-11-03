@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Pytania{% endblock %}
+{% block content %}
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tytuł</th>
+          <th scope="col">validAnswer</th>
+          <th scope="col">bad1</th>
+          <th scope="col">bad2</th>
+          <th scope="col">bad3</th>
+          <th scope="col">catid</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for v, q in questions.items() %}
+        <tr>
+          <th scope="row">{{ q.id }}</th>
+          <td>{{ q.title }}</td>
+          <td>{{ q.validAnswer }}</td>
+          <td>{{ q.answer1 }}</td>
+          <td>{{ q.answer2 }}</td>
+          <td>{{ q.answer3 }}</td>
+          <td>{{ q.categoryId }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

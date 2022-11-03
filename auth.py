@@ -24,8 +24,8 @@ def insert(val1, val2, val3, val4, val5, val6):
         "answer1" : val1, 
         "answer2" : val2, 
         "answer3" : val3, 
-        "answer" : val4, 
-        "category_id" : val5, 
+        "validAnswer" : val4, 
+        "categoryId" : val5, 
         "title" : val6
         }
     db.child("questions").push(data)
@@ -44,6 +44,11 @@ def ca():
     cat_dict.update({cat.val()['id'] : cat.val()['name']})
 
   return cat_dict
+
+def qu():
+  all_questions = db.child("questions").get()
+  return(all_questions.val())
+qu()
 
 # all_users = db.child("categories").get()
 # for user in all_users.each():

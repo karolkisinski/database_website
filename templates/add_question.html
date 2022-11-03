@@ -5,23 +5,23 @@
   <form action="/add_question" method='POST' id="question_form">
     <div class="form-group">
       <label for="title">Podaj słówko</label>
-      <input type="text" class="form-control" name="title" id="title" placeholder="Cat">
+      <input type="text" class="form-control" name="title" id="title" placeholder="Cat"  required>
     </div>
     <div class="form-group mt-2">
         <label for="title">Podaj prawidłową odpowiedź</label>
-        <input type="text" class="form-control" name="validanswer" id="validanswer" placeholder="Cat">
+        <input type="text" class="form-control" name="validanswer" id="validanswer" placeholder="Cat" required>
       </div>
       <div class="form-group mt-2">
         <label for="badanswer1">Podaj pierwszą błędną odpowiedź</label>
-        <input type="text" class="form-control" name="badanswer1" id="badanswer1" placeholder="Cat">
+        <input type="text" class="form-control" name="badanswer1" id="badanswer1" placeholder="Cat" required>
       </div>
       <div class="form-group mt-2">
         <label for="badanswer2">Podaj drugą błędną odpowiedź</label>
-        <input type="text" class="form-control" name="badanswer2" id="badanswer2" placeholder="Cat">
+        <input type="text" class="form-control" name="badanswer2" id="badanswer2" placeholder="Cat" required>
       </div>
       <div class="form-group mt-2">
         <label for="badanswer3">Podaj trzecią błędną odpowiedź</label>
-        <input type="text" class="form-control" name="badanswer3" id="badanswer3" placeholder="Cat">
+        <input type="text" class="form-control" name="badanswer3" id="badanswer3" placeholder="Cat" required>
       </div>
     <div class="form-group mt-2">
       <label for="category">Kategoria</label>
@@ -31,18 +31,43 @@
         {% endfor %}
       </select>
     </div>
-
-    <button type="button" class="btn btn-outline-light btn-lg px-5 mt-5" data-bs-toggle="modal" data-bs-target="#myModal" id="addBtn">Dodaj pytanie</button>
+    <style>
+      #input:invalid + .addBtn {
+    opacity: 0.5;
+    pointer-events: none;
+}
+    </style>
+    <!-- <button type="button" class="btn btn-outline-light btn-lg px-5 mt-5" data-bs-toggle="modal" data-bs-target="#myModal" id="addBtn">Dodaj pytanie</button> -->
+    <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Dodaj pytanie</button>
   </form>
-  
-  <div class="container mt-3">
-    <h2>Modal Scroll Example</h2>
-    <p>Click on the button to open the modal.</p>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
     
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-      Open modal
-    </button>
-  </div>
-  
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h2 class="modal-title" style="color: black;">Potwierdź dodanie</h2>
+            <button type="button" class="btn-close text-black" data-bs-dismiss="modal"></button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            <h3 style="color: black;">Czy potwierdzasz dodanie pytania?</h3>
+            <div class="col-md-12">
+              <span id="confirmationMsg" style="color: black;"></span>
+            </div>
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+            <button id="confirmedBtn" type="button" type="submit" class="btn  btn-sm btn-primary">Yes</button>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+    
 {% endblock %}
 

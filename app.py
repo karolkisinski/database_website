@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect, flash
 import os
 from dotenv import load_dotenv
 import pyrebase
-from auth import insert, ca
+from auth import insert, ca, qu
 app = Flask(__name__,
             static_folder='templates/static')
 
@@ -73,17 +73,26 @@ def add_question():
             category = request.form.get('category')
             try:
                 string = "{}, " ", {}, " ", {}, " ", {}, " ", {}, " ", {}".format(title, validanswer, badanswer1, badanswer2, badanswer3, category)
-                return string
-            except:
-                flash(f"Cos poszlo nie tak!1", "error")
+                insert(badanswer1, badanswer2, badanswer3, validanswer, category, title)
+                flash("Pytanie dodane!")
                 return render_template('add_question.html', categories=ca())
-        else:
-            flash(f"Cos poszlo nie tak!2", "error")
-            return render_template('add_question.html', categories=ca())
+            except:
+                flash(f"Cos poszlo nie tak :(", "error")
+                return render_template('add_question.html', categories=ca())
+        return render_template('add_question.html', categories=ca())
     else:
          flash(f"Logowanie wymagane!3", "error")
          return render_template('login.html')
 
+@app.route('/questions')
+def get_questions():
+     if('user' in session):
+        try:
+            questions = qu()
+            return render_template('show_questions.html', questions = questions)
+        except:
+            flash(f"Cos poszlo nie tak :(", "error")
+            return home
 if __name__ == '__main__':
     app.run(debug=True)
 
