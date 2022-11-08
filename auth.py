@@ -46,9 +46,12 @@ def ca():
   return cat_dict
 
 def qu():
-  all_questions = db.child("questions").get()
-  return(all_questions.val())
-qu()
+  all_questions = db.child("questions").get().val()
+  return(all_questions)
+
+def get_questions_by_category(id):
+  questions = db.child("questions").order_by_child("categoryId").equal_to(id).get().val()
+  return(questions)
 
 # all_users = db.child("categories").get()
 # for user in all_users.each():
