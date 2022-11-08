@@ -92,8 +92,6 @@ def get_questions():
             return render_template('show_questions.html', questions = questions)
         except:
             flash(f"Cos poszlo nie tak :(", "error")
-            return render_template('home.html')
-            #return home
 
 @app.route('/questions/<id>')
 def questions_by_category(id):
@@ -104,7 +102,29 @@ def questions_by_category(id):
         except:
             flash(f"Cos poszlo nie tak :(", "error")
             return render_template('home.html')
-            #return home
+
+def parseCSV(file):
+    print("hellol")
+    import pandas as pd
+    col_names = ['answer1','answer2','answer3', 'validAnswer', 'title' , 'categoryId']
+    csvData = pd.read_csv(file,names=col_names, header=None)
+    for i,row in csvData.iterrows():
+        insert(row['answer1'], row['answer2'], row['answer3'], row['categoryId'], row['title'], row['validAnswer'])
+
+@app.route('/import', methods=['GET','POST'])
+def import_questions_from_file():
+    if(request.method!="POST"):
+        return render_template('import.html')
+    if(request.method=="POST"):
+        uploaded_file = request.files['file']
+        print(uploaded_file)
+        if uploaded_file.filename != '':   
+            print("A TUTAJ?")
+            file_path = os.path.join(os.getenv('UPLOAD_FOLDER'), uploaded_file.filename)
+            uploaded_file.save(file_path)
+            parseCSV(file_path)
+        return render_template("import.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
 
