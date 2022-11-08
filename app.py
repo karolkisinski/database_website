@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, request, redirect, flash
 import os
 from dotenv import load_dotenv
 import pyrebase
-from auth import insert, ca, qu
+from auth import insert, ca, qu, get_questions_by_category
 app = Flask(__name__,
             static_folder='templates/static')
 
@@ -92,7 +92,19 @@ def get_questions():
             return render_template('show_questions.html', questions = questions)
         except:
             flash(f"Cos poszlo nie tak :(", "error")
-            return home
+            return render_template('home.html')
+            #return home
+
+@app.route('/questions/<id>')
+def questions_by_category(id):
+     if('user' in session):
+        try:
+            questions = get_questions_by_category(id)
+            return render_template('show_questions.html', questions = questions)
+        except:
+            flash(f"Cos poszlo nie tak :(", "error")
+            return render_template('home.html')
+            #return home
 if __name__ == '__main__':
     app.run(debug=True)
 
