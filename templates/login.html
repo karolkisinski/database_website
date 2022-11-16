@@ -2,18 +2,18 @@
 {% extends 'base.html' %}
 {% block title %}Logowanie{% endblock %}
 {% block content %}
-<h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-<form action="/" method='POST'>
-  <div class="form-outline form-white mb-4">
-    <input type="email" name="email" id="email" class="form-control form-control-lg" required/>
-    <label class="form-label" for="email">Email</label>
-  </div>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign In </h2>
 
-  <div class="form-outline form-white mb-4">
-    <input type="password" name="password" id="password" class="form-control form-control-lg" required/>
-    <label class="form-label" for="password">Hasło</label>
-  </div>
+    <!-- Login Form -->
+    <form action="/" method="POST">
+      <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Hasło">
+      <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>
 
-  <button class="btn btn-outline-light btn-lg px-5" type="submit">Zaloguj</button>
-</form>
+  </div>
+</div>
 {% endblock %}
