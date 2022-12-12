@@ -18,13 +18,44 @@
     <script src="{{ url_for('static', filename='js/confirmation.js') }}" async></script>
     <title>{% block title %} {% endblock %}</title>
 </head>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Quiz - Administracja</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Strona główna</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/categories">Kategorie</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/questions">Pytania</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add_question">Dodaj pytanie</a>
+      </li>
+      <li class="nav-item ml-auto">
+        <a class="nav-link ml-auto" href="/import">Wczytaj pytania</a>
+      </li>
+    </ul>
+    {% if 'user' in session %}
+    <div class="my-2 my-md-0 ml-auto">
+      <a class="nav-link ml-auto" href="/logout">Wyloguj</a>
+    </div>
+    {% endif %}
+  </div>
+<div></div></nav>
 <body>
     <section class="vh-200 gradient-custom">
-        <div class="container py-5 h-100">
+        <div class="container py-5 h-100 w-300">
           <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="col-275">
               <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
+                <div class="card-body p-15 text-center">
       
                   <div class="mb-md-5 mt-md-4 pb-5">
                     

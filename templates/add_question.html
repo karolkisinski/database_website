@@ -4,8 +4,8 @@
 <script src="{{ url_for('static', filename='js/confirmation.js') }}" async></script>
   <form action="/add_question" method='POST' id="question_form">
     <div class="form-group">
-      <label for="title">Podaj słówko</label>
-      <input type="text" class="form-control" name="title" id="title" placeholder="Cat"  required>
+      <label for="title" class="mt-2">Podaj słówko po polsku</label>
+      <input type="text" class="form-control" name="title" id="title" placeholder="Kot"  required>
     </div>
     <div class="form-group mt-2">
         <label for="title">Podaj prawidłową odpowiedź</label>
@@ -13,15 +13,15 @@
       </div>
       <div class="form-group mt-2">
         <label for="badanswer1">Podaj pierwszą błędną odpowiedź</label>
-        <input type="text" class="form-control" name="badanswer1" id="badanswer1" placeholder="Cat" required>
+        <input type="text" class="form-control" name="badanswer1" id="badanswer1" placeholder="Bike" required>
       </div>
       <div class="form-group mt-2">
         <label for="badanswer2">Podaj drugą błędną odpowiedź</label>
-        <input type="text" class="form-control" name="badanswer2" id="badanswer2" placeholder="Cat" required>
+        <input type="text" class="form-control" name="badanswer2" id="badanswer2" placeholder="Rat" required>
       </div>
       <div class="form-group mt-2">
         <label for="badanswer3">Podaj trzecią błędną odpowiedź</label>
-        <input type="text" class="form-control" name="badanswer3" id="badanswer3" placeholder="Cat" required>
+        <input type="text" class="form-control" name="badanswer3" id="badanswer3" placeholder="Truck" required>
       </div>
     <div class="form-group mt-2">
       <label for="category">Kategoria</label>

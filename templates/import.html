@@ -1,13 +1,29 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
   <head>
     <title>FLASK CSV File Upload</title>
   </head>
   <body>
     <h1>Upload your CSV file</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
+ <form method="POST" action="" enctype="multipart/form-data">
       <p><input type="file" accept=".csv" name="file"></p>
+      <p><button type="submit" value="Submit"></p>
+    </form> -->
+    <!-- <form method="POST" action="" enctype="multipart/form-data">
+      <label class="form-label" for="customFile">Default file input example</label>
+      <input type="file" class="form-control" id="file" name="file" accept=".csv" />
       <p><button type="submit" value="Submit"></p>
     </form>
   </body>
-</html>
+</html> -->
+
+{% extends 'base.html' %}
+{% block title %}Wczytywanie pytań z pliku{% endblock %}
+{% block content %}
+<form method="POST" action="" enctype="multipart/form-data">
+  <label class="form-label" for="customFile">Wczytaj plik z pytaniami</label>
+  <input type="file" class="form-control" id="file" name="file" accept=".csv" />
+  <p><button type="submit" value="Submit" class="mt-2 btn btn-primary text-center">Wczytaj</p>
+</form>
+
+{% endblock %}
