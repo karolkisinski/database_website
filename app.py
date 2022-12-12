@@ -116,14 +116,22 @@ def import_questions_from_file():
     if(request.method!="POST"):
         return render_template('import.html')
     if(request.method=="POST"):
-        uploaded_file = request.files['file']
-        print(uploaded_file)
-        if uploaded_file.filename != '':   
-            print("A TUTAJ?")
-            file_path = os.path.join(os.getenv('UPLOAD_FOLDER'), uploaded_file.filename)
-            uploaded_file.save(file_path)
-            parseCSV(file_path)
-        return render_template("import.html")
+        try:
+            uploaded_file = request.files['file']
+            print(uploaded_file)
+            if uploaded_file.filename != '':   
+                print("A TUTAJ?")
+                file_path = os.path.join(os.getenv('UPLOAD_FOLDER'), uploaded_file.filename)
+                uploaded_file.save(file_path)
+                parseCSV(file_path)
+                flash(f"Pytania zostały wczytane!", "success")
+                return render_template("import.html")
+            else:
+                flash(f"Plik nie został wczytany!", "error")
+                return render_template("import.html")
+        except:
+            flash(f"Cos poszlo nie tak :(", "error")
+            return render_template("import.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
