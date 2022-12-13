@@ -29,6 +29,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Strona główna</a>
       </li>
+      {% if 'user' in session %}
       <li class="nav-item">
         <a class="nav-link" href="/categories">Kategorie</a>
       </li>
@@ -42,7 +43,6 @@
         <a class="nav-link ml-auto" href="/import">Wczytaj pytania</a>
       </li>
     </ul>
-    {% if 'user' in session %}
     <div class="my-2 my-md-0 ml-auto">
       <a class="nav-link ml-auto" href="/logout">Wyloguj</a>
     </div>
