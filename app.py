@@ -81,7 +81,7 @@ def add_question():
                 return render_template('add_question.html', categories=ca())
         return render_template('add_question.html', categories=ca())
     else:
-         flash(f"Logowanie wymagane!3", "error")
+         flash(f"Logowanie wymagane!", "error")
          return render_template('login.html')
 
 @app.route('/questions')
@@ -92,12 +92,15 @@ def get_questions():
             return render_template('show_questions.html', questions = questions)
         except:
             flash(f"Cos poszlo nie tak :(", "error")
+            return render_template('home.html')
 
 @app.route('/questions/<id>')
 def questions_by_category(id):
      if('user' in session):
         try:
+            print("Błąd przed")
             questions = get_questions_by_category(id)
+            print("Błąd po")
             return render_template('show_questions.html', questions = questions)
         except:
             flash(f"Cos poszlo nie tak :(", "error")
@@ -113,25 +116,29 @@ def parseCSV(file):
 
 @app.route('/import', methods=['GET','POST'])
 def import_questions_from_file():
-    if(request.method!="POST"):
-        return render_template('import.html')
-    if(request.method=="POST"):
-        try:
-            uploaded_file = request.files['file']
-            print(uploaded_file)
-            if uploaded_file.filename != '':   
-                print("A TUTAJ?")
-                file_path = os.path.join(os.getenv('UPLOAD_FOLDER'), uploaded_file.filename)
-                uploaded_file.save(file_path)
-                parseCSV(file_path)
-                flash(f"Pytania zostały wczytane!", "success")
+    if('user' in session):
+        if(request.method!="POST"):
+            return render_template('import.html')
+        if(request.method=="POST"):
+            try:
+                uploaded_file = request.files['file']
+                print(uploaded_file)
+                if uploaded_file.filename != '':   
+                    print("A TUTAJ?")
+                    file_path = os.path.join(os.getenv('UPLOAD_FOLDER'), uploaded_file.filename)
+                    uploaded_file.save(file_path)
+                    parseCSV(file_path)
+                    flash(f"Pytania zostały wczytane!", "success")
+                    return render_template("import.html")
+                else:
+                    flash(f"Plik nie został wczytany!", "error")
+                    return render_template("import.html")
+            except:
+                flash(f"Cos poszlo nie tak :(", "error")
                 return render_template("import.html")
-            else:
-                flash(f"Plik nie został wczytany!", "error")
-                return render_template("import.html")
-        except:
-            flash(f"Cos poszlo nie tak :(", "error")
-            return render_template("import.html")
+    else:
+         flash(f"Logowanie wymagane!", "error")
+         return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
