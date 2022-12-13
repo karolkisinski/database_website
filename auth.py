@@ -53,8 +53,7 @@ def get_questions_by_category(id):
   questions = db.child("questions").order_by_child("categoryId").equal_to(id).get().val()
   return(questions)
 
-categ(5, "Sport")
 # all_users = db.child("categories").get()
 # for user in all_users.each():
 #     print(user.key()) # Morty
-#     print(user.val()['name']) # {name": "Mortimer 'Morty' Smith"}
+#     print(user.val()['name']) # {name": "Mortimer 'Morty' Smith"} 
