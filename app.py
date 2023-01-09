@@ -112,7 +112,7 @@ def parseCSV(file):
     col_names = ['answer1','answer2','answer3', 'validAnswer', 'title' , 'categoryId']
     csvData = pd.read_csv(file,names=col_names, header=None)
     for i,row in csvData.iterrows():
-        insert(row['answer1'], row['answer2'], row['answer3'], row['categoryId'], row['title'], row['validAnswer'])
+        insert(row['answer1'], row['answer2'], row['answer3'], str(row['categoryId']), str(row['title']), row['validAnswer'])
 
 @app.route('/import', methods=['GET','POST'])
 def import_questions_from_file():
