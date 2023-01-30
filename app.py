@@ -3,6 +3,8 @@ import os
 from dotenv import load_dotenv
 import pyrebase
 from auth import insert, ca, qu, get_questions_by_category
+import cv2
+
 app = Flask(__name__,
             static_folder='templates/static')
 
@@ -140,6 +142,35 @@ def import_questions_from_file():
          flash(f"Logowanie wymagane!", "error")
          return render_template('login.html')
 
+@app.route('/obrazek', methods=['GET', 'POST'])
+def upload_image():
+    if('user' in session):
+        if(request.method!="POST"):
+            return render_template('upload_image.html')
+        if(request.method=="POST"):
+            try:
+                uploaded_file = request.files['file']
+                print(uploaded_file)
+                if uploaded_file.filename != '':   
+                    print("A TUTAJ?")
+                    file_path = os.path.join(os.getenv('UPLOAD_FOLDER'), uploaded_file.filename)
+                    uploaded_file.save(file_path)
+                    img = cv2.imread(file_path)
+                    print("####IMG DIMENSIONS####")
+                    print(str(img.shape[1]) + "x" + str(img.shape[0]))
+                    os.remove(file_path)
+                    #parseCSV(file_path)
+                    flash(f"Pytania zostały wczytane!", "success")
+                    return render_template("import.html")
+                else:
+                    flash(f"Plik nie został wczytany!", "error")
+                    return render_template("import.html")
+            except:
+                flash(f"Cos poszlo nie tak :(", "error")
+                return render_template("import.html")
+    else:
+         flash(f"Logowanie wymagane!", "error")
+         return render_template('login.html')
 if __name__ == '__main__':
     app.run(debug=True)
 

@@ -18,6 +18,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
+storage = firebase.storage()
 
 def insert(val1, val2, val3, val4, val5, val6):
     data = {
@@ -52,6 +53,9 @@ def qu():
 def get_questions_by_category(id):
   questions = db.child("questions").order_by_child("categoryId").equal_to(id).get().val()
   return(questions)
+
+def upload_image(image_path):
+  storage.child("/").put(image_path)
 
 # all_users = db.child("categories").get()
 # for user in all_users.each():
