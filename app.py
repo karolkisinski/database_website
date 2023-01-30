@@ -158,6 +158,7 @@ def upload_image():
                     img = cv2.imread(file_path)
                     print("####IMG DIMENSIONS####")
                     print(str(img.shape[1]) + "x" + str(img.shape[0]))
+
                     os.remove(file_path)
                     #parseCSV(file_path)
                     flash(f"Pytania zostały wczytane!", "success")
@@ -172,5 +173,5 @@ def upload_image():
          flash(f"Logowanie wymagane!", "error")
          return render_template('login.html')
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)s
 
